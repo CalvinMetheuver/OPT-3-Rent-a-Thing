@@ -70,11 +70,24 @@ public class Systeem {
         return false;
     }
 
-    public double berekenPrijs(int prod, int dag, boolean vz) {
+    public double berekenPrijs(int prod, int dag, boolean vz, boolean korting) {
         double tot = getProduct(prod).prijs * dag;
         if(vz){
             tot += getProduct(prod).verzekering * dag;
         }
+        if(korting) {
+            if (dag >= 10) {
+                tot *= 0.90;
+                //5% korting
+            } else if (dag >= 5) {
+                tot *= 0.95;
+                //10% korting
+            }
+        }
         return tot;
+    }
+
+    public Boolean verhuring(int gn, String ww, int pr, int dag, boolean vz){
+        return (loginCheck(gn, ww) != null && isVerhuurd(pr) && vz);
     }
 }

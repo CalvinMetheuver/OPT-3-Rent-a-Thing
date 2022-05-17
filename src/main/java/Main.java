@@ -63,9 +63,9 @@ public class Main {
                 int vz = scanner.nextInt();
                 scanner.nextLine();
                 if(vz == 0){
-                    System.out.println(s.berekenPrijs(prod, dag, false));
+                    System.out.println(s.berekenPrijs(prod, dag, false, false));
                 }else{
-                System.out.println(s.berekenPrijs(prod, dag, true));
+                System.out.println(s.berekenPrijs(prod, dag, true, false));
                 }
 
         }

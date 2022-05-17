@@ -57,9 +57,24 @@ class SysteemTest {
     void berekenPrijs() {
         dbs.addProduct(new Boor(9, "Bosch", "CL"));
         //5 eu per dag + 1/dag vz
-        assertEquals(5 ,dbs.berekenPrijs(9, 1, false));
-        assertEquals(50 ,dbs.berekenPrijs(9, 10, false));
-        assertEquals(6 ,dbs.berekenPrijs(9, 1, true));
-        assertEquals(60 ,dbs.berekenPrijs(9, 10, true));
+        assertEquals(5 ,dbs.berekenPrijs(9, 1, false, false));
+        assertEquals(50 ,dbs.berekenPrijs(9, 10, false, false));
+        assertEquals(6 ,dbs.berekenPrijs(9, 1, true, false));
+        assertEquals(60 ,dbs.berekenPrijs(9, 10, true, false));
+        assertEquals(5 ,dbs.berekenPrijs(9, 1, false, true));
+        assertEquals(20 ,dbs.berekenPrijs(9, 4, false, true));
+        assertEquals(23.75 ,dbs.berekenPrijs(9, 5, false, true));
+        assertEquals(42.75 ,dbs.berekenPrijs(9, 9, false, true));
+        assertEquals(45 ,dbs.berekenPrijs(9, 10, false, true));
+        assertEquals(63 ,dbs.berekenPrijs(9, 14, false, true));
+        assertEquals(405 ,dbs.berekenPrijs(9, 90, false, true));
+    }
+
+    @Test
+    void verhuring(){
+        dbs.addMedewerker("C", "M", "ww");
+        dbs.addProduct(new Boor(2, "HBO", "XL"));
+        dbs.addVerhuur(2);
+        assertTrue(dbs.verhuring(0, "ww", 2, 3, true));
     }
 }
