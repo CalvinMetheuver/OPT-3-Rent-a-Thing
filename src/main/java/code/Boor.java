@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 
 public class Boor extends Product {
     private String type;
-    public Boor(Store s, String merk, String type) throws FileNotFoundException {
-        super(s, "Boor", merk);
+    public Boor(String merk, String type) throws FileNotFoundException {
+        super("Boor", merk);
         this.type = type;
     }
 

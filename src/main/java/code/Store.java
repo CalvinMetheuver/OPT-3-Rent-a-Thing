@@ -3,9 +3,17 @@ package code;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Store {
+public class Store implements Observer{
     private static Store singleton = null;
+    private final List<Observer> listeners = new ArrayList<Observer>();
+
+
+    public void addObserver(Observer observer){
+        listeners.add(observer);
+    }
 
     public ArrayList<Product> verhuurd;
     public List<Product> producten;
@@ -31,8 +39,19 @@ public class Store {
 
     public List<Product> getProducten(){return producten;}
 
-    public String login(String code, String ww){
-        return "X";
+    public Medewerker login(int code, String ww){
+        for(Medewerker m: medewerkers){
+            if ((m.getMedcode() ==code) && m.getWw().equals(ww)){
+                return m;
+            }
+        }
+        return null;
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        notifyAll();
     }
 }
 

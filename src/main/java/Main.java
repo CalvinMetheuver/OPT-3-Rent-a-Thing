@@ -1,20 +1,22 @@
 import code.*;
 
 import java.io.FileNotFoundException;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
 
     private Boolean inStore = true;
     private ISwitchable p;
-
+/*
     {
         try {
-            p = new ProductFactory(Store.getInstance()).getProduct();
+            //p = new ProductFactory(Store.getInstance()).getProduct());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+ */
 
 
     private void status(){
@@ -35,10 +37,13 @@ public class Main {
     }
 
     public static void seed(Store s) throws FileNotFoundException {
-        new Auto(s, "Mercedes",900);
-        new Vrachtwagen(s, "Volkswagen",300, 1900);
-        new Boor(s, "Bosch", "X780");
-        new Medewerker(s, "Calvin", "Metheuver", 0, "ww");
+        ProductFactory.AUTO_FACTORY.createProduct("Merrie", "", 900,80);
+        ProductFactory.BOOR_FACTORY.createProduct("Bosch", "XL090", 900,90);
+        ProductFactory.VRACHTWAGEN_FACTORY.createProduct("Mercedes", "", 9000, 800);
+        new Auto("Mercedes",900);
+        new Vrachtwagen("Volkswagen",300, 1900);
+        new Boor( "Bosch", "X780");
+        new Medewerker( "Calvin", "Metheuver", 3, "ww");
         new Klant("Karen", "Klein");
     }
 

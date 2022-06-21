@@ -7,8 +7,8 @@ public class Vrachtwagen extends Product {
     private int laadvermogen;
     private int gewicht;
 
-    public Vrachtwagen(Store s, String merk, int laadvermogen, int gewicht) throws FileNotFoundException {
-        super(s, "Vrachtwagen", merk);
+    public Vrachtwagen(String merk, int laadvermogen, int gewicht) throws FileNotFoundException {
+        super("Vrachtwagen", merk);
         this.laadvermogen = laadvermogen;
         this.gewicht = gewicht;
     }

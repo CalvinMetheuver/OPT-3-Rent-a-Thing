@@ -1,12 +1,23 @@
 package code;
 
+import java.io.FileNotFoundException;
+
 public class Medewerker {
+    private Store s;
+    {
+        try {
+            s = Store.getInstance();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private final String voornaam;
     private final String achternaam;
     int medcode;
     String ww;
 
-    public Medewerker(Store s, String voornaam, String achternaam, int medcode, String ww) {
+    public Medewerker(String voornaam, String achternaam, int medcode, String ww) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.medcode = medcode;

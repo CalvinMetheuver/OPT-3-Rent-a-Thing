@@ -2,99 +2,87 @@ package code;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-class EventHandlerToggle implements EventHandler<ActionEvent> {
+class EvHToggle implements EventHandler<ActionEvent>{
 
-	private Product product;
-	private Status status;
+    private Status status;
+    private Product p;
 
-	public EventHandlerToggle (Product p, Status status) {
-		this.product = p;
-		this.status = status;
-	}
+    EvHToggle(Product p, Status status) throws FileNotFoundException {
+        this.p = p;
+        this.status = status;
+    }
 
-	@Override
-	public void handle (ActionEvent actionEvent) {
-		//this.product.setOpVerhuurd(!this.product.verhuurd());
-		this.status.draw ();
-	}
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        this.p.setOpVerhuurd(!p.verhuurd(), new Medewerker("c", "b", 8, "j"), new Klant("n", "m"));
+        try {
+            this.status.draw();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
-class EventHandlerClose implements EventHandler<WindowEvent> {
+class  EvHClose implements EventHandler<WindowEvent>{
 
-	private Store store;
-	private Status status;
+    private Store s = Store.getInstance();
+    private Status status;
 
-	public EventHandlerClose (Store store, Status status) {
-		this.store = store;
-		this.status = status;
-	}
+    public EvHClose (Status status) throws FileNotFoundException {
+        this.status = status;
+    }
 
-	@Override
-	public void handle (WindowEvent windowEvent) {
-
-		for (Product p : store.getProducten()) {
-			p.deleteObserver (this.status);
-		}
-	}
+    @Override
+    public void handle(WindowEvent windowEvent) {
+        for(Product p: s.getVerhuurd()){
+            p.deleteObserver(this.status);
+        }
+    }
 }
 
-public class Status extends Stage implements Observer
-{
-	private Store store;
-	private Pane rootPane;
+public class Status extends Stage implements Observer {
+    private Store s = Store.getInstance();
+    AnchorPane pane = new AnchorPane();
 
-	public Status (Store store) {
+    public Status(Medewerker m) throws IOException {
+        for (Product p: s.producten){
+            p.addObserver(this);
+        }
+        Stage stage = new Stage();
+        draw();
+        pane = FXMLLoader.load(getClass().getResource("/view/Menu.fxml"));
+        stage.setTitle("Menu");
+        stage.setScene(new Scene(pane));
+        stage.setOnCloseRequest(new EvHClose(this));
+        stage.show();
+    }
 
-		this.store = store;
+    public void draw() throws IOException {
+        this.pane.getChildren ().clear ();
+        this.pane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Overzicht.fxml")));
+    }
 
-		for (Product p : store.getProducten()) {
-			p.addObserver (this);
-		}
-
-		rootPane = new Pane ();
-		setTitle ("Status");
-		rootPane.setMinSize (200, 200);
-		draw ();
-		Scene scene = new Scene (rootPane);
-		setScene (scene);
-		setOnCloseRequest (new EventHandlerClose (store, this));
-		show ();
-	}
-
-	public void draw () {
-
-		this.rootPane.getChildren ().clear ();
-		VBox vBox = new VBox ();
-		this.rootPane.getChildren ().add (vBox);
-
-		for (Product product : store.getProducten())
-		{
-			HBox hBox = new HBox ();
-			vBox.getChildren ().add (hBox);
-			hBox.getChildren ().add (new Label ("Lane " + product.getNaam () + "\t"));
-			hBox.getChildren ().add (new Label (product.verhuurd() ? "occupied\t" : "free\t"));
-			Button button = new Button ("Toggle");
-			button.setOnAction (new EventHandlerToggle (product, this));
-			hBox.getChildren ().add (button);
-		}
-	}
-
-	@Override
-	public void update (Observable o, Object arg) {
-		draw ();
-	}
-
-
+    @Override
+    public void update(Observable o, Object arg) {
+        try {
+            draw();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package Controller;
 
 import code.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -17,13 +18,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
 public class LoginController extends Stage {
-    private Store s;
+    private Store s = Store.getInstance();
     private Pane rpane;
+    private Medewerker m;
 
     @FXML
     private AnchorPane rootPane;
@@ -37,18 +41,27 @@ public class LoginController extends Stage {
     @FXML
     private Label ErrorField;
 
+    public LoginController() throws FileNotFoundException {
+    }
+
     @FXML
     void loginButtonPressed() throws IOException{
-        System.out.println("Pressed");
-        if(true) {
-            Stage stage = new Stage();
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/Menu.fxml"));
-            stage.setTitle("Menu");
-            stage.setScene(new Scene(pane));
-            stage.show();
-        } else{
-            ErrorField.setTextFill(Color.FIREBRICK);
-            ErrorField.setText("Wrong password or username...");
+        m = null;
+        try {
+            int medcode = Integer.parseInt(usernameField.getText());
+            String ww = passwordField.getText();
+            m = s.login(medcode, ww);
+        } catch (NumberFormatException numberFormatException) {
+
         }
+            if (m != null) {
+                new Status(m);
+                ErrorField.setVisible(false);
+            } else {
+                ErrorField.setVisible(true);
+                ErrorField.setTextFill(Color.FIREBRICK);
+                ErrorField.setText("Wrong password or username...");
+            }
+
     }
 }

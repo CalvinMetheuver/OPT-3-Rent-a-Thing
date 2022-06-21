@@ -6,8 +6,8 @@ public class Auto extends Product {
 
     private int gewicht;
 
-    public Auto(Store s, String merk, int gewicht) throws FileNotFoundException {
-        super(s,"Auto", merk);
+    public Auto(String merk, int gewicht) throws FileNotFoundException {
+        super("Auto", merk);
         this.gewicht = gewicht;
     }
 

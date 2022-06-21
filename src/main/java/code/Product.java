@@ -1,7 +1,10 @@
 package code;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 public abstract class Product extends Observable implements ISwitchable {
 
@@ -12,7 +15,8 @@ public abstract class Product extends Observable implements ISwitchable {
     private String merk;
     private boolean opVoorraad;
 
-    public Product(Store s, String naam, String merk) throws FileNotFoundException {
+
+    public Product(String naam, String merk) throws FileNotFoundException {
         this.naam = naam;
         this.merk = merk;
         s.getProducten().add(this);
@@ -37,7 +41,6 @@ public abstract class Product extends Observable implements ISwitchable {
     }
 
     public void setOpVerhuurd(boolean status, Medewerker med, Klant klant){
-
         if(status && klant != null){
             s.verhuurd.add(this);
             verhuurdAan = new Object[]{med, klant};
@@ -47,17 +50,6 @@ public abstract class Product extends Observable implements ISwitchable {
         } else {
             System.out.println("FOUTMELDING, GEEN NAAM");
         }
-
-        if(status && klant != null){
-            if(!s.getVerhuurd().contains(this)){
-                s.verhuurd.add(this);
-                verhuurdAan = new Object[]{med, klant};
-            }
-        }else if (status){
-            s.getVerhuurd().remove(this);
-        } else {
-
-        }
         this.opVoorraad = status;
         setChanged();
         notifyObservers();
@@ -66,5 +58,6 @@ public abstract class Product extends Observable implements ISwitchable {
     public abstract String getTot();
 
     public abstract double berekenPrijs(Boolean verzekering);
+
 
 }

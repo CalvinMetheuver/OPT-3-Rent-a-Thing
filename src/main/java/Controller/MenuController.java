@@ -3,6 +3,7 @@ package Controller;
 import code.Store;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,6 +16,9 @@ public class MenuController {
 
     @FXML
     private AnchorPane rootPane;
+
+    @FXML
+    private Label naam;
 
     public MenuController() throws FileNotFoundException {
     }
