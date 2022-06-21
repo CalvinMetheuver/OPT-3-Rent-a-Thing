@@ -1,17 +1,39 @@
 package code;
 
-public class Boor extends Product {
-    String merk;
-    String type;
+import java.io.FileNotFoundException;
 
-    public Boor(int prodnr, String merk, String type) {
-        super(prodnr, 5, 1);
-        this.merk = merk;
+public class Boor extends Product {
+    private String type;
+    public Boor(Store s, String merk, String type) throws FileNotFoundException {
+        super(s, "Boor", merk);
         this.type = type;
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
-    double verzekering() {
-        return 0;
+    public String getTot() {
+        return getNaam() + " - " + getMerk() + " - " + getType();
+    }
+
+    @Override
+    public void teruggebracht() {
+        System.out.println(this.getTot() +  " is weer beschikbaar");
+    }
+
+    @Override
+    public void uitgeleend() {
+        System.out.println(this.getTot() +  " is niet meer beschikbaar");
+    }
+
+    @Override
+    public double berekenPrijs(Boolean verzekering) {
+        if(verzekering){
+            return 5+1;
+        }else{
+            return 5;
+        }
     }
 }

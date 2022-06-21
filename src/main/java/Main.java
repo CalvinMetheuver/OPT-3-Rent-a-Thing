@@ -1,13 +1,100 @@
-import code.Boor;
-import code.Medewerker;
-import code.Systeem;
+import code.*;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+
+    private Boolean inStore = true;
+    private ISwitchable p;
+
+    {
+        try {
+            p = new ProductFactory(Store.getInstance()).getProduct();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void status(){
         Scanner scanner = new Scanner(System.in);
-        Systeem dbs = new Systeem();
+        System.out.println("e(xit)/enter");
+        String inv = scanner.nextLine();
+
+        while(!inv.equals("e")){
+            if (inStore){
+                p.uitgeleend();
+            } else{
+                p.teruggebracht();
+            }
+            inStore = !inStore;
+            inv = scanner.nextLine();
+        }
+        System.out.println("UIT");
+    }
+
+    public static void seed(Store s) throws FileNotFoundException {
+        new Auto(s, "Mercedes",900);
+        new Vrachtwagen(s, "Volkswagen",300, 1900);
+        new Boor(s, "Bosch", "X780");
+        new Medewerker(s, "Calvin", "Metheuver", 0, "ww");
+        new Klant("Karen", "Klein");
+    }
+
+    public static void getInventory(){
+            //System.out.println(p.getProdnr()+1 + "-" + p.getNaam());
+
+    }
+
+    public static int menu(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wat wilt u huren:");
+        //getInventory();
+        int menu = scanner.nextInt();
+        scanner.nextLine();
+        return menu;
+    }
+
+
+
+    public static void main(String[] args) throws FileNotFoundException{
+        Store s = Store.getInstance();
+        seed(Store.getInstance());
+
+        //s.producten.get(0).setOpVerhuurd(false);
+
+        JavaFXApp.main(args);
+
+        /*
+        Scanner scanner = new Scanner(System.in);
+        seed();
+
+        System.out.println("STOP");
+
+
+        int menu = menu();
+        while(menu > 0){
+            if(menu == 8){
+                new Main().status();
+            }else {
+                /*
+                Product p = p.getVoorraad().get(menu - 1);
+                String order = p.verhuur();
+                System.out.println(order);
+                System.out.println();
+
+            }
+            menu = menu();
+        }
+        */
+    }
+}
+
+
+    /*
+    Scanner scanner = new Scanner(System.in);
+    Systeem dbs = new Systeem();
 
         dbs.addMedewerker("Calvin", "Metheuver", "ww");
         dbs.addProduct(new Boor(1, "Bosch", "XO123"));
@@ -15,6 +102,8 @@ public class Main {
 
         dbs.addVerhuur(1);
         dbs.addVerhuur(6);
+
+        System.out.println(dbs.getProduct(1).berekenPrijs(6));
 
         menu(dbs);
 
@@ -35,11 +124,10 @@ public class Main {
         } else {
             System.out.println("Inloggen is niet gelukt");
         }
+     */
 
-        //JavaFXApp.main(args);
-    }
-
-    public static void menu(Systeem s){
+/*
+public static void menu(Systeem s){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wat wilt u doen?");
         System.out.println("1) product verhuren");
@@ -69,5 +157,4 @@ public class Main {
                 }
 
         }
-    }
-}
+ */
