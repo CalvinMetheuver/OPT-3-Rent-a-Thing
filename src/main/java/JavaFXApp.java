@@ -23,16 +23,6 @@ public class JavaFXApp extends Application {
         Scene startScene = new Scene(rootPane);
 
         primaryStage.setScene(startScene);
-        primaryStage.setTitle("Bowling lanes");
+        primaryStage.setTitle("Rent-A-Thing: Login");
         primaryStage.show();
-    /*
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Menu.fxml"));
-
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Rent-a-Thing");
-        primaryStage.show();
-    }
-     */
     }}

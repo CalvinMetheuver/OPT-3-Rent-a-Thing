@@ -60,7 +60,7 @@ public class LoginController extends Stage {
             } else {
                 ErrorField.setVisible(true);
                 ErrorField.setTextFill(Color.FIREBRICK);
-                ErrorField.setText("Wrong password or username...");
+                ErrorField.setText("Error...");
             }
 
     }

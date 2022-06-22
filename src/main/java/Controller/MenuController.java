@@ -14,6 +14,7 @@ public class MenuController {
 
     private Store s = Store.getInstance();
 
+
     @FXML
     private AnchorPane rootPane;
 
@@ -21,6 +22,10 @@ public class MenuController {
     private Label naam;
 
     public MenuController() throws FileNotFoundException {
+    }
+
+    public void initialize() throws FileNotFoundException {
+
     }
 
     @FXML

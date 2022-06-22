@@ -41,7 +41,8 @@ public class Store implements Observer{
 
     public Medewerker login(int code, String ww){
         for(Medewerker m: medewerkers){
-            if ((m.getMedcode() ==code) && m.getWw().equals(ww)){
+            if ((m.getMedcode() ==code) && m.getWw().equals(ww) && !m.actief){
+                m.actief = true;
                 return m;
             }
         }

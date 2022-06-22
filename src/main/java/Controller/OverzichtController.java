@@ -25,8 +25,6 @@ public class OverzichtController {
     private VBox vBox;
 
     @FXML
-    private GridPane grid;
-    @FXML
     private VBox container;
     @FXML
     private VBox opVoorraad;
@@ -63,7 +61,7 @@ public class OverzichtController {
         name.setOnMouseClicked(mouseEvent -> {
             System.out.println(product);
             try {
-                Stage stage = new Stage();
+
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/view/Details.fxml"));
 
@@ -72,9 +70,7 @@ public class OverzichtController {
                 DetailsController dc = loader.getController();
                 dc.setProduct(product);
 
-                stage.setTitle("Details");
-                stage.setScene(new Scene(m));
-                stage.show();
+                rootPane.getChildren().setAll(m);
 
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -82,9 +78,6 @@ public class OverzichtController {
 
         });
     }
-
-
-
 
     void loopProduct(){
         System.out.println(s.producten.size());

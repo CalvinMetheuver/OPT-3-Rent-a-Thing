@@ -42,8 +42,10 @@ class  EvHClose implements EventHandler<WindowEvent>{
 
     private Store s = Store.getInstance();
     private Status status;
+    private Medewerker m;
 
-    public EvHClose (Status status) throws FileNotFoundException {
+    public EvHClose (Status status, Medewerker m) throws FileNotFoundException {
+        this.m = m;
         this.status = status;
     }
 
@@ -52,6 +54,8 @@ class  EvHClose implements EventHandler<WindowEvent>{
         for(Product p: s.getVerhuurd()){
             p.deleteObserver(this.status);
         }
+        m.actief = false;
+
     }
 }
 
@@ -66,9 +70,9 @@ public class Status extends Stage implements Observer {
         Stage stage = new Stage();
         draw();
         pane = FXMLLoader.load(getClass().getResource("/view/Menu.fxml"));
-        stage.setTitle("Menu");
+        stage.setTitle("Rent-A-Thing");
         stage.setScene(new Scene(pane));
-        stage.setOnCloseRequest(new EvHClose(this));
+        stage.setOnCloseRequest(new EvHClose(this, m));
         stage.show();
     }
 

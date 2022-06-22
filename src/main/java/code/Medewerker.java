@@ -16,6 +16,7 @@ public class Medewerker {
     private final String achternaam;
     int medcode;
     String ww;
+    Boolean actief;
 
     public Medewerker(String voornaam, String achternaam, int medcode, String ww) {
         this.voornaam = voornaam;
@@ -23,6 +24,7 @@ public class Medewerker {
         this.medcode = medcode;
         this.ww = ww;
         s.medewerkers.add(this);
+        actief = false;
     }
 
     public String getVoornaam() {

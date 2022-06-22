@@ -44,21 +44,8 @@ public class Main {
         new Vrachtwagen("Volkswagen",300, 1900);
         new Boor( "Bosch", "X780");
         new Medewerker( "Calvin", "Metheuver", 3, "ww");
+        new Medewerker( "Justin", "Metheuver", 2, "ww");
         new Klant("Karen", "Klein");
-    }
-
-    public static void getInventory(){
-            //System.out.println(p.getProdnr()+1 + "-" + p.getNaam());
-
-    }
-
-    public static int menu(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Wat wilt u huren:");
-        //getInventory();
-        int menu = scanner.nextInt();
-        scanner.nextLine();
-        return menu;
     }
 
 
