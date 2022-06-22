@@ -3,71 +3,76 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DetailsController">
     <children>
-        <Label alignment="CENTER" layoutX="156.0" layoutY="39.0" prefHeight="38.0" prefWidth="288.0" text="Beschikbare Producten" fx:id="x">
+        <Label alignment="CENTER" layoutX="156.0" layoutY="39.0" prefHeight="40.0" prefWidth="300.0" text="Beschikbare Producten" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="40.0" fx:id="x">
             <font>
                 <Font size="26.0" />
             </font></Label>
-        <Label fx:id="opv" alignment="CENTER" layoutX="156.0" layoutY="78.0" prefHeight="38.0" prefWidth="288.0" text="?">
+        <Label fx:id="opv" alignment="CENTER" layoutX="156.0" layoutY="78.0" prefHeight="40.0" prefWidth="300.0" text="?" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="80.0">
             <font>
                 <Font size="20.0" />
             </font></Label>
-
-        <Label fx:id="prijs" layoutX="205.0" layoutY="232.0" prefHeight="38.0" prefWidth="346.0" text="Prijs/dag">
+        <Label layoutX="21.0" layoutY="118.0" prefHeight="40.0" prefWidth="150.0" text="Product" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="120.0">
             <font>
                 <Font size="26.0" />
             </font>
         </Label>
-        <Label layoutX="21.0" layoutY="118.0" prefHeight="38.0" prefWidth="142.0" text="Product">
+        <Label fx:id="vzL" layoutX="21.0" layoutY="156.0" prefHeight="40.0" prefWidth="150.0" text="Verzekering" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="160.0">
             <font>
                 <Font size="26.0" />
             </font>
         </Label>
-        <Label layoutX="21.0" layoutY="194.0" prefHeight="38.0" prefWidth="142.0" text="Verzekering">
+        <Label fx:id="prijsL" layoutX="14.0" layoutY="194.0" prefHeight="40.0" prefWidth="150.0" text="Prijs/dag" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="200.0">
             <font>
                 <Font size="26.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="232.0" prefHeight="38.0" prefWidth="142.0" text="Prijs/dag">
-            <font>
-                <Font size="26.0" />
-            </font>
-        </Label>
-        <CheckBox fx:id="vz" layoutX="205.0" layoutY="194.0" mnemonicParsing="false">
+      <Label fx:id="medL" layoutX="21.0" layoutY="194.0" prefHeight="40.0" prefWidth="150.0" text="Medewerker" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="200.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="232.0" prefHeight="40.0" prefWidth="150.0" text="Klant" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="product" layoutX="205.0" layoutY="118.0" prefHeight="40.0" prefWidth="350.0" text="Label" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+        <CheckBox fx:id="vz" layoutX="205.0" layoutY="156.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="160.0">
             <font>
                 <Font size="26.0" />
             </font>
         </CheckBox>
-        <Button fx:id="home" layoutX="85.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#home" prefHeight="26.0" prefWidth="101.0" text="Annuleer" />
-        <Button fx:id="vh" layoutX="439.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#vh" prefHeight="26.0" prefWidth="87.0" text="Verhuur" />
-      <Label fx:id="product" layoutX="205.0" layoutY="118.0" prefHeight="38.0" prefWidth="346.0" text="Label">
+
+        <Label fx:id="prijs" layoutX="205.0" layoutY="194.0" prefHeight="40.0" prefWidth="350.0" text="€" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="200.0">
+            <font>
+                <Font size="26.0" />
+            </font>
+        </Label>
+      <Label fx:id="med" layoutX="205.0" layoutY="194.0" prefHeight="40.0" prefWidth="350.0" text="Label" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="194.0" prefHeight="38.0" prefWidth="142.0" text="Klant">
+      <TextField fx:id="klantL" layoutX="205.0" layoutY="239.0" prefHeight="40.0" prefWidth="350.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <Label fx:id="klant" layoutX="205.0" layoutY="232.0" prefHeight="40.0" prefWidth="350.0" text="Label" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="240.0">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="232.0" prefHeight="38.0" prefWidth="149.0" text="Medewerker">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="klant" layoutX="205.0" layoutY="194.0" prefHeight="38.0" prefWidth="346.0" text="Label">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="med" layoutX="205.0" layoutY="232.0" prefHeight="38.0" prefWidth="346.0" text="Label">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
+        <Button fx:id="home" layoutX="85.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#home" prefHeight="25.0" prefWidth="100.0" text="Annuleer" AnchorPane.leftAnchor="100.0" />
+        <Button fx:id="actie" layoutX="439.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#actie" prefHeight="25.0" prefWidth="100.0" text="Actie" AnchorPane.rightAnchor="100.0" />
     </children>
 </AnchorPane>
