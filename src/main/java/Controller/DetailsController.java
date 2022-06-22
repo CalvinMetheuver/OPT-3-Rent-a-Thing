@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.FileNotFoundException;
@@ -19,62 +20,116 @@ public class DetailsController {
     Product prod;
 
     @FXML
-    private Label product;
-
-    @FXML
     private AnchorPane rootPane;
 
     @FXML
-    private Label prijs;
+    private Label product;
 
     @FXML
     private Label opv;
 
     @FXML
-    private CheckBox vz;
-
-    @FXML
-    private Label med;
+    private TextField klantL;
 
     @FXML
     private Label klant;
 
     @FXML
-    private Button vh;
+    private Label vzL;
+
+    @FXML
+    private CheckBox vz;
+
+    @FXML
+    private Label medL;
+
+    @FXML
+    private Label med;
+
+    @FXML
+    private Label prijsL;
+
+    @FXML
+    private Label prijs;
+
+    @FXML
+    private Button action;
 
     @FXML
     private Button home;
 
     public DetailsController() throws FileNotFoundException {
-
     }
 
     public void initialize() throws FileNotFoundException {
-
+        vzL.setVisible(false);
+        vz.setVisible(false);
+        medL.setVisible(false);
+        med.setVisible(false);
+        prijsL.setVisible(false);
+        prijs.setVisible(false);
+        klantL.setVisible(false);
+        klant.setVisible(false);
     }
 
     public void setProduct(Product p){
         prod = p;
-
         product.setText(p.getTot());
+
+        if (!p.verhuurd()){
+            nietverhuurd(p);
+        } else{
+            welverhuurd(p);
+        }
+        opv.setVisible(true);
+        klik(p);
+
+    }
+
+    private void nietverhuurd(Product p) {
+        opv.setText("AANWEZIG");
+        opv.setStyle("-fx-background-color:GREEN");
+
+        medL.setVisible(false);
+        med.setVisible(false);
+        klant.setVisible(false);
+
+        prijsL.setVisible(true);
+        vzL.setVisible(true);
+        klantL.setVisible(true);
+
         String sPrijs = String.format("€%.2f",p.berekenPrijs(vz.isSelected()));
         prijs.setText(sPrijs);
-        opv.setVisible(true);
-        if (!p.verhuurd()){
-            opv.setText("AANWEZIG");
-            opv.setStyle("-fx-background-color:GREEN");
+        prijs.setVisible(true);
 
-            prijs.setVisible(false);
-            vz.setVisible(false);
+        vz.setVisible(true);
+        vz.setDisable(false);
+    }
 
-            med.setVisible(true);
+    private void welverhuurd(Product p) {
+        opv.setText("NIET AANWEZIG");
+        opv.setStyle("-fx-background-color:RED");
 
+        prijsL.setVisible(false);
+        prijs.setVisible(false);
+        vzL.setVisible(false);
+        vz.setVisible(false);
+        klantL.setVisible(false);
 
-        } else{
-            opv.setText("NIET AANWEZIG");
-            opv.setStyle("-fx-background-color:RED");
-        }
+        medL.setVisible(true);
 
+        med.setText(p.getMedewerker().getVoornaam());
+        med.setVisible(true);
+
+        klant.setText(p.getKlant().getAnaam());
+        klant.setVisible(true);
+    }
+
+    public void klik(Product p) {
+        vz.setOnAction((event) -> {
+            String sPrijs = String.format("€%.2f",p.berekenPrijs(vz.isSelected()));
+            prijs.setText(sPrijs);
+        });
     }
 
     @FXML
