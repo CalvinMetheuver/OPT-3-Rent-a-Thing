@@ -53,7 +53,7 @@ public class DetailsController {
     private Label prijs;
 
     @FXML
-    private Button action;
+    private Button actie;
 
     @FXML
     private Button home;
@@ -104,6 +104,8 @@ public class DetailsController {
 
         vz.setVisible(true);
         vz.setDisable(false);
+
+        actie.setText("Verhuur");
     }
 
     private void welverhuurd(Product p) {
@@ -123,6 +125,8 @@ public class DetailsController {
 
         klant.setText(p.getKlant().getAnaam());
         klant.setVisible(true);
+
+        actie.setText("Retour");
     }
 
     public void klik(Product p) {
@@ -133,9 +137,23 @@ public class DetailsController {
     }
 
     @FXML
-    private void vh() throws IOException {
-
-        prod.setOpVerhuurd(!prod.verhuurd(), s.medewerkers.get(0), new Klant("Kees", "vdSpek"));
+    private void actie() throws IOException {
+        if(prod.verhuurd()){
+            prod.setOpVerhuurd(false, null, null);
+        }else {
+            String[] klant = new String[2];
+            //ACTIEVE MEDEWERKER
+            try {
+                klant = klantL.getText().split(", ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (klant != null && klant.length == 2) {
+                prod.setOpVerhuurd(!prod.verhuurd(), s.medewerkers.get(0), new Klant(klant[1], klant[0]));
+            } else {
+                prod.setOpVerhuurd(!prod.verhuurd(), s.medewerkers.get(0), new Klant("Voornaam", "Achternaam"));
+            }
+        }
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -152,6 +170,7 @@ public class DetailsController {
             exception.printStackTrace();
         }
     }
+
 
     @FXML
     private void home() throws IOException {
