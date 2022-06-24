@@ -3,7 +3,6 @@ package Controller;
 import code.Medewerker;
 import code.Product;
 import code.Store;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -17,7 +16,7 @@ import javafx.scene.text.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class OverzichtController {
+public class BeheerController {
     Store s = Store.getInstance();
     Medewerker m;
 
@@ -37,12 +36,12 @@ public class OverzichtController {
     private ScrollPane scroll;
 
 
-    public OverzichtController() throws FileNotFoundException {
+    public BeheerController() throws FileNotFoundException {
 
     }
 
     public void initialize() throws FileNotFoundException {
-       loopProduct();
+        loopProduct();
     }
 
     void setHboxStyle(HBox hBox){
@@ -64,13 +63,12 @@ public class OverzichtController {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/view/Details.fxml"));
 
-                AnchorPane p = loader.load();
+                AnchorPane m = loader.load();
 
                 DetailsController dc = loader.getController();
                 dc.setProduct(product);
-                dc.setMedewerker(m);
 
-                rootPane.getChildren().setAll(p);
+                rootPane.getChildren().setAll(m);
 
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -122,17 +120,4 @@ public class OverzichtController {
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
     }
-
-    @FXML
-    public void back(ActionEvent actionEvent) throws IOException {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/Menu.fxml"));
-
-            AnchorPane p = loader.load();
-
-            MenuController dc = loader.getController();
-            dc.setMedewerker(m);
-
-            rootPane.getChildren().setAll(p);
-        }
 }

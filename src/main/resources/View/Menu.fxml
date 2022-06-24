@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
    <children>
-      <Label fx:id="naam" layoutX="286.0" layoutY="89.0" text="Welkom" />
+      <Label fx:id="naam" layoutX="572.0" layoutY="6.0" prefHeight="40.0" prefWidth="100.0" text="Label" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button layoutX="79.0" layoutY="175.0" mnemonicParsing="false" onMouseClicked="#overzicht" text="Overzicht" />
       <Button layoutX="282.0" layoutY="175.0" mnemonicParsing="false" onMouseClicked="#beheer" text="Beheer" />
       <Button layoutX="471.0" layoutY="175.0" mnemonicParsing="false" onMouseClicked="#loguit" text="Uitloggen" />
