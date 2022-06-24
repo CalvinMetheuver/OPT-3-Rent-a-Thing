@@ -1,8 +1,10 @@
 package Controller;
 
 import code.Klant;
+import code.Medewerker;
 import code.Product;
 import code.Store;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -17,10 +19,14 @@ import java.io.IOException;
 public class DetailsController {
 
     Store s = Store.getInstance();
+    Medewerker m;
     Product prod;
 
     @FXML
     private AnchorPane rootPane;
+
+    @FXML
+    private Label naam;
 
     @FXML
     private Label product;
@@ -142,16 +148,15 @@ public class DetailsController {
             prod.setOpVerhuurd(false, null, null);
         }else {
             String[] klant = new String[2];
-            //ACTIEVE MEDEWERKER
             try {
                 klant = klantL.getText().split(", ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             if (klant != null && klant.length == 2) {
-                prod.setOpVerhuurd(!prod.verhuurd(), s.medewerkers.get(0), new Klant(klant[1], klant[0]));
+                prod.setOpVerhuurd(!prod.verhuurd(), m, new Klant(klant[1], klant[0]));
             } else {
-                prod.setOpVerhuurd(!prod.verhuurd(), s.medewerkers.get(0), new Klant("Voornaam", "Achternaam"));
+                prod.setOpVerhuurd(!prod.verhuurd(), m, new Klant("Voornaam", "Achternaam"));
             }
         }
 
@@ -159,22 +164,37 @@ public class DetailsController {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/Details.fxml"));
 
-            AnchorPane m = loader.load();
+            AnchorPane p = loader.load();
 
             DetailsController dc = loader.getController();
             dc.setProduct(prod);
+            dc.setMedewerker(m);
 
-            rootPane.getChildren().setAll(m);
+            rootPane.getChildren().setAll(p);
 
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
 
+    void setMedewerker(Medewerker m) {
+        this.m = m;
+        naam.setText(m.getMedcode() + ") " + m.getVoornaam());
+        System.out.println(m);
+    }
+
 
     @FXML
     private void home() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/Menu.fxml"));
-        rootPane.getChildren().setAll(pane);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/Overzicht.fxml"));
+
+        AnchorPane p = loader.load();
+
+        OverzichtController dc = loader.getController();
+        dc.setMedewerker(m);
+
+        rootPane.getChildren().setAll(p);
+
     }
 }

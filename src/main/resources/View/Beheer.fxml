@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BeheerController">
+    <Label fx:id="naam" layoutX="572.0" layoutY="6.0" prefHeight="40.0" prefWidth="100.0" text="Label" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <children>
+        <ScrollPane fx:id="scroll" layoutY="82.0" maxHeight="319" prefWidth="600.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="598.0">
+                    <children>
+                        <VBox fx:id="container" prefHeight="0.0" prefWidth="500.0" />
+                        <VBox fx:id="opVoorraad" layoutX="497.0" prefHeight="318.0" prefWidth="100.0" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <Label alignment="CENTER" layoutX="-1.0" layoutY="1.0" prefHeight="60.0" prefWidth="600.0" text="Overzicht">
+            <font>
+                <Font size="22.0" />
+            </font></Label>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="34.0" prefHeight="53.0" prefWidth="304.0" text="Product" />
+        <Label alignment="CENTER" layoutX="495.0" layoutY="34.0" prefHeight="54.0" prefWidth="103.0" text="Aanwezig" />
+    </children>
+</AnchorPane>
