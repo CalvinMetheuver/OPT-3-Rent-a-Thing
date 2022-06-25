@@ -3,6 +3,7 @@ package Controller;
 import code.Medewerker;
 import code.Product;
 import code.Store;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -29,8 +30,6 @@ public class BeheerController {
     @FXML
     private VBox container;
     @FXML
-    private VBox opVoorraad;
-    @FXML
     private AnchorPane rootPane;
     @FXML
     private ScrollPane scroll;
@@ -41,7 +40,9 @@ public class BeheerController {
     }
 
     public void initialize() throws FileNotFoundException {
-        loopProduct();
+        setProduct("Boor");
+        setProduct("Auto");
+        setProduct("Vrachtwagen");
     }
 
     void setHboxStyle(HBox hBox){
@@ -51,24 +52,25 @@ public class BeheerController {
         //hBox.setMaxSize(280,35);
     }
 
-    void setLabels(Product product){
-        Label name = new Label(product.getTot());
+    void setLabels(String product){
+        Label name = new Label(product);
         name.setFont(new Font(16));
         HBox.setMargin(name, new Insets(0, 0, 0, 0));
         hbox.getChildren().add(name);
         name.setOnMouseClicked(mouseEvent -> {
-            System.out.println(product);
             try {
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/view/Details.fxml"));
+                loader.setLocation(getClass().getResource("/view/Toevoegen.fxml"));
 
-                AnchorPane m = loader.load();
+                AnchorPane p = loader.load();
 
-                DetailsController dc = loader.getController();
+                ToevoegenController dc = loader.getController();
+                dc.setMedewerker(m);
                 dc.setProduct(product);
 
-                rootPane.getChildren().setAll(m);
+
+                rootPane.getChildren().setAll(p);
 
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -77,47 +79,21 @@ public class BeheerController {
         });
     }
 
-    void loopProduct(){
-        System.out.println(s.producten.size());
-        for(Product p:s.producten){
-            setProduct(p);
-            setAanwezig(p);
-        }
-    }
-
-    void setProduct(Product p){
+    void setProduct(String s){
         vBox = new VBox();
         hbox = new HBox();
 
-        setLabels(p);
+        setLabels(s);
         setHboxStyle(hbox);
         vBox.getChildren().add(hbox);
         container.getChildren().add(vBox);
     }
 
-    void setAanwezig(Product p){
-
-        vBox = new VBox();
-        hbox = new HBox();
-
-        if(p.verhuurd()){
-            vBox.setStyle("-fx-background-color:RED");
-        }else{
-            vBox.setStyle("-fx-background-color:GREEN");
-        }
-
-        CheckBox x = new CheckBox();
-        x.setSelected(!p.verhuurd());
-        x.setDisable(true);
-        hbox.getChildren().add(x);
-
-        setHboxStyle(hbox);
-        vBox.getChildren().add(hbox);
-        opVoorraad.getChildren().add(vBox);
-    }
-
     public void setMedewerker(Medewerker m) {
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
+    }
+
+    public void back(ActionEvent actionEvent) {
     }
 }

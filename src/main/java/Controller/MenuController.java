@@ -23,6 +23,9 @@ public class MenuController {
     @FXML
     private Label naam;
 
+    @FXML
+    private Label titel;
+
     public MenuController() throws FileNotFoundException {
     }
 
@@ -62,5 +65,6 @@ public class MenuController {
     public void setMedewerker(Medewerker m) {
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
+        titel.setText("Hallo " + m.getVoornaam());
     }
 }

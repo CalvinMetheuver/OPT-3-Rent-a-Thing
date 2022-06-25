@@ -53,6 +53,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException{
         Store s = Store.getInstance();
         seed(Store.getInstance());
+        seed(Store.getInstance());
 
         //s.producten.get(0).setOpVerhuurd(false);
 

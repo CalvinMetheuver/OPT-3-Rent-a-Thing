@@ -180,7 +180,6 @@ public class DetailsController {
     void setMedewerker(Medewerker m) {
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
-        System.out.println(m);
     }
 
 

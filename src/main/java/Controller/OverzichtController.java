@@ -125,14 +125,14 @@ public class OverzichtController {
 
     @FXML
     public void back(ActionEvent actionEvent) throws IOException {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/Menu.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/Menu.fxml"));
 
-            AnchorPane p = loader.load();
+        AnchorPane p = loader.load();
 
-            MenuController dc = loader.getController();
-            dc.setMedewerker(m);
+        MenuController dc = loader.getController();
+        dc.setMedewerker(m);
 
-            rootPane.getChildren().setAll(p);
-        }
+        rootPane.getChildren().setAll(p);
+    }
 }
