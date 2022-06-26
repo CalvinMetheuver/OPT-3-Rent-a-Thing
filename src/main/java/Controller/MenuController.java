@@ -1,12 +1,15 @@
 package Controller;
 
 import code.Medewerker;
+import code.Product;
+import code.Status;
 import code.Store;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +18,7 @@ public class MenuController {
 
     private Store s = Store.getInstance();
     private Medewerker m;
+    private Status st;
 
 
     @FXML
@@ -42,7 +46,7 @@ public class MenuController {
         AnchorPane pane =loader.load();
 
         OverzichtController mc = loader.getController();
-        mc.setMedewerker(m);
+        mc.setStatus(st, m);
 
         rootPane.getChildren().setAll(pane);
     }
@@ -54,15 +58,24 @@ public class MenuController {
         AnchorPane pane =loader.load();
 
         BeheerController mc = loader.getController();
-        mc.setMedewerker(m);
+        mc.setStatus(st, m);
 
         rootPane.getChildren().setAll(pane);
     }
 
     public void loguit(MouseEvent mouseEvent) {
+
+        for(Product p: s.getVerhuurd()){
+            p.deleteObserver(st);
+        }
+        m.setActief(false);
+
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        stage.close();
     }
 
-    public void setMedewerker(Medewerker m) {
+    public void setStatus(Status st, Medewerker m) {
+        this.st = st;
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
         titel.setText("Hallo " + m.getVoornaam());

@@ -1,23 +1,16 @@
 package code;
 
-import Controller.DetailsController;
 import Controller.MenuController;
 import Controller.OverzichtController;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.EventObject;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -37,8 +30,7 @@ class  EvHClose implements EventHandler<WindowEvent>{
         for(Product p: s.getVerhuurd()){
             p.deleteObserver(this.status);
         }
-        m.actief = false;
-
+        m.setActief(false);
     }
 }
 
@@ -49,11 +41,13 @@ public class Status extends Stage implements Observer {
 
     public Status(Medewerker m) throws IOException {
         this.m = m;
+        Stage stage = new Stage();
+        draw();
+
         for (Product p: s.producten){
             p.addObserver(this);
         }
-        Stage stage = new Stage();
-        draw();
+        s.actief.add(this);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/Menu.fxml"));
@@ -61,7 +55,7 @@ public class Status extends Stage implements Observer {
         pane=loader.load();
 
         MenuController mc = loader.getController();
-        mc.setMedewerker(m);
+        mc.setStatus(this, m);
 
         stage.setTitle("Rent-A-Thing");
         stage.setScene(new Scene(pane));
@@ -79,9 +73,18 @@ public class Status extends Stage implements Observer {
         AnchorPane p = loader.load();
 
         OverzichtController dc = loader.getController();
-        dc.setMedewerker(m);
+        dc.setStatus(this, m);
 
         this.pane.getChildren().setAll(p);
+    }
+
+    public void addOb(Product p) throws IOException {
+        for(Status x: s.actief) {
+            p.addObserver(x);
+        }
+    }
+
+    public void close(){
     }
 
     @Override

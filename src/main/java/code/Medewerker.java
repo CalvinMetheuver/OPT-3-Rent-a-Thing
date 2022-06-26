@@ -27,6 +27,10 @@ public class Medewerker {
         actief = false;
     }
 
+    public void setActief(Boolean actief) {
+        this.actief = actief;
+    }
+
     public String getVoornaam() {
         return voornaam;
     }

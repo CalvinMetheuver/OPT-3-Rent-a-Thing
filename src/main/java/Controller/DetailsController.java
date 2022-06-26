@@ -1,10 +1,6 @@
 package Controller;
 
-import code.Klant;
-import code.Medewerker;
-import code.Product;
-import code.Store;
-import javafx.event.ActionEvent;
+import code.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -18,9 +14,11 @@ import java.io.IOException;
 
 public class DetailsController {
 
-    Store s = Store.getInstance();
-    Medewerker m;
-    Product prod;
+    private Store s = Store.getInstance();
+    private Medewerker m;
+    private Product prod;
+    private Status st;
+
 
     @FXML
     private AnchorPane rootPane;
@@ -62,7 +60,7 @@ public class DetailsController {
     private Button actie;
 
     @FXML
-    private Button home;
+    private Label error;
 
     public DetailsController() throws FileNotFoundException {
     }
@@ -76,6 +74,7 @@ public class DetailsController {
         prijs.setVisible(false);
         klantL.setVisible(false);
         klant.setVisible(false);
+        error.setVisible(false);
     }
 
     public void setProduct(Product p){
@@ -96,6 +95,8 @@ public class DetailsController {
         opv.setText("AANWEZIG");
         opv.setStyle("-fx-background-color:GREEN");
 
+        error.setVisible(false);
+
         medL.setVisible(false);
         med.setVisible(false);
         klant.setVisible(false);
@@ -103,6 +104,7 @@ public class DetailsController {
         prijsL.setVisible(true);
         vzL.setVisible(true);
         klantL.setVisible(true);
+        klantL.setText("Achternaam, Voornaam");
 
         String sPrijs = String.format("€%.2f",p.berekenPrijs(vz.isSelected()));
         prijs.setText(sPrijs);
@@ -118,6 +120,8 @@ public class DetailsController {
         opv.setText("NIET AANWEZIG");
         opv.setStyle("-fx-background-color:RED");
 
+        error.setVisible(false);
+
         prijsL.setVisible(false);
         prijs.setVisible(false);
         vzL.setVisible(false);
@@ -129,7 +133,7 @@ public class DetailsController {
         med.setText(p.getMedewerker().getVoornaam());
         med.setVisible(true);
 
-        klant.setText(p.getKlant().getAnaam());
+        klant.setText(p.getKlant().getAnaam() + ", " + p.getKlant().getVnaam());
         klant.setVisible(true);
 
         actie.setText("Retour");
@@ -155,29 +159,31 @@ public class DetailsController {
             }
             if (klant != null && klant.length == 2) {
                 prod.setOpVerhuurd(!prod.verhuurd(), m, new Klant(klant[1], klant[0]));
+
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/view/Details.fxml"));
+
+                    AnchorPane p = loader.load();
+
+                    DetailsController dc = loader.getController();
+                    dc.setProduct(prod);
+                    dc.setStatus(st, m);
+
+                    rootPane.getChildren().setAll(p);
+
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
             } else {
-                prod.setOpVerhuurd(!prod.verhuurd(), m, new Klant("Voornaam", "Achternaam"));
+                System.out.println("Input Error");
+                error.setVisible(true);
             }
-        }
-
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/Details.fxml"));
-
-            AnchorPane p = loader.load();
-
-            DetailsController dc = loader.getController();
-            dc.setProduct(prod);
-            dc.setMedewerker(m);
-
-            rootPane.getChildren().setAll(p);
-
-        } catch (IOException exception) {
-            exception.printStackTrace();
         }
     }
 
-    void setMedewerker(Medewerker m) {
+    void setStatus(Status st, Medewerker m) {
+        this.st = st;
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
     }
@@ -191,7 +197,7 @@ public class DetailsController {
         AnchorPane p = loader.load();
 
         OverzichtController dc = loader.getController();
-        dc.setMedewerker(m);
+        dc.setStatus(st, m);
 
         rootPane.getChildren().setAll(p);
 

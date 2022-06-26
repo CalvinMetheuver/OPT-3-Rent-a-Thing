@@ -2,6 +2,7 @@ package Controller;
 
 import code.Medewerker;
 import code.Product;
+import code.Status;
 import code.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +19,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class OverzichtController {
-    Store s = Store.getInstance();
-    Medewerker m;
+    private Store s = Store.getInstance();
+    private Medewerker m;
+    private Status st;
 
     private HBox hbox;
 
@@ -68,7 +70,7 @@ public class OverzichtController {
 
                 DetailsController dc = loader.getController();
                 dc.setProduct(product);
-                dc.setMedewerker(m);
+                dc.setStatus(st, m);
 
                 rootPane.getChildren().setAll(p);
 
@@ -118,7 +120,8 @@ public class OverzichtController {
         opVoorraad.getChildren().add(vBox);
     }
 
-    public void setMedewerker(Medewerker m) {
+    public void setStatus(Status st, Medewerker m) {
+        this.st = st;
         this.m = m;
         naam.setText(m.getMedcode() + ") " + m.getVoornaam());
     }
@@ -131,7 +134,7 @@ public class OverzichtController {
         AnchorPane p = loader.load();
 
         MenuController dc = loader.getController();
-        dc.setMedewerker(m);
+        dc.setStatus(st, m);
 
         rootPane.getChildren().setAll(p);
     }

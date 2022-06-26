@@ -45,6 +45,7 @@ public class Main {
         new Boor( "Bosch", "X780");
         new Medewerker( "Calvin", "Metheuver", 3, "ww");
         new Medewerker( "Justin", "Metheuver", 2, "ww");
+        new Medewerker( "dd", "Metheuver", 1, "ww");
         new Klant("Karen", "Klein");
     }
 
@@ -52,7 +53,6 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException{
         Store s = Store.getInstance();
-        seed(Store.getInstance());
         seed(Store.getInstance());
 
         //s.producten.get(0).setOpVerhuurd(false);
