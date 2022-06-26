@@ -18,12 +18,14 @@ public class Store implements Observer{
     public ArrayList<Product> verhuurd;
     public List<Product> producten;
     public List<Medewerker> medewerkers;
+    public ArrayList<Status> actief;
 
 
     private Store() {
         this.verhuurd = new ArrayList<>();
         this.producten = new ArrayList<>();
         this.medewerkers = new ArrayList<>();
+        this.actief = new ArrayList<>();
     }
 
     public static Store getInstance() throws FileNotFoundException{

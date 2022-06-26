@@ -28,20 +28,20 @@ public class Vrachtwagen extends Product {
     }
 
     @Override
-    public void teruggebracht() {
-        System.out.println(this.getTot() +  " is weer beschikbaar");
-    }
-
-    @Override
-    public void uitgeleend() {
-        System.out.println(this.getTot() +  " is niet meer beschikbaar");
-    }
-
-    @Override
     public double berekenPrijs(Boolean verzekering) {
         if(verzekering){
             return laadvermogen*0.10 + gewicht * 0.01;
         }
         return laadvermogen*0.10;
+    }
+
+    @Override
+    public void teruggebracht() {
+
+    }
+
+    @Override
+    public void uitgeleend() {
+
     }
 }
