@@ -45,7 +45,7 @@ public class LoginController extends Stage {
     }
 
     @FXML
-    void loginButtonPressed() throws IOException{
+    void loginButtonPressed() throws IOException {
         m = null;
         try {
             int medcode = Integer.parseInt(usernameField.getText());
@@ -54,14 +54,17 @@ public class LoginController extends Stage {
         } catch (NumberFormatException numberFormatException) {
 
         }
-            if (m != null) {
-                new Status(m);
-                ErrorField.setVisible(false);
-            } else {
-                ErrorField.setVisible(true);
-                ErrorField.setTextFill(Color.FIREBRICK);
-                ErrorField.setText("Error...");
-            }
+        if (m != null) {
+            new Status(m);
+            ErrorField.setVisible(false);
+        } else {
+            ErrorField.setVisible(true);
+            ErrorField.setTextFill(Color.FIREBRICK);
+            ErrorField.setText("Error...");
+        }
 
+        usernameField.clear();
+        passwordField.clear();
     }
+
 }
