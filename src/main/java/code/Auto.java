@@ -16,16 +16,6 @@ public class Auto extends Product {
     }
 
     @Override
-    public void teruggebracht() {
-        System.out.println(this.getTot() +  " is weer beschikbaar");
-    }
-
-    @Override
-    public void uitgeleend() {
-        System.out.println(this.getTot() +  " is niet meer beschikbaar");
-    }
-
-    @Override
     public String getTot() {
         return getNaam() + " - " + getMerk() + " - " + getGewicht();
     }

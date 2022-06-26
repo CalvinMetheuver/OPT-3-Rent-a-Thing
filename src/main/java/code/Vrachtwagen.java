@@ -34,14 +34,4 @@ public class Vrachtwagen extends Product {
         }
         return laadvermogen*0.10;
     }
-
-    @Override
-    public void teruggebracht() {
-
-    }
-
-    @Override
-    public void uitgeleend() {
-
-    }
 }

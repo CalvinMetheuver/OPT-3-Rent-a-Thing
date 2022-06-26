@@ -49,7 +49,6 @@ public class Store implements Observer{
             }
         }
         return null;
-
     }
 
     @Override
@@ -57,6 +56,3 @@ public class Store implements Observer{
         notifyAll();
     }
 }
-
-//this.voorraad.add(new Boor("FHX", "XL7000"));
-//        this.voorraad.add(new Auto("VW", 800));

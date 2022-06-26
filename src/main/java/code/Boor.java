@@ -19,16 +19,6 @@ public class Boor extends Product {
     }
 
     @Override
-    public void teruggebracht() {
-        System.out.println(this.getTot() +  " is weer beschikbaar");
-    }
-
-    @Override
-    public void uitgeleend() {
-        System.out.println(this.getTot() +  " is niet meer beschikbaar");
-    }
-
-    @Override
     public double berekenPrijs(Boolean verzekering) {
         if(verzekering){
             return 5+1;

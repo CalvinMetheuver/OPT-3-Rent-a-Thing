@@ -51,7 +51,6 @@ public class OverzichtController {
         hBox.setStyle("-fx-border-color: #8181c9;");
         hbox.setAlignment(Pos.CENTER);
         hBox.setMinSize(10, 35);
-        //hBox.setMaxSize(280,35);
     }
 
     void setLabels(Product product){
@@ -60,7 +59,6 @@ public class OverzichtController {
         HBox.setMargin(name, new Insets(0, 0, 0, 0));
         hbox.getChildren().add(name);
         name.setOnMouseClicked(mouseEvent -> {
-            System.out.println(product);
             try {
 
                 FXMLLoader loader = new FXMLLoader();
@@ -82,7 +80,6 @@ public class OverzichtController {
     }
 
     void loopProduct(){
-        System.out.println(s.producten.size());
         for(Product p:s.producten){
             setProduct(p);
             setAanwezig(p);

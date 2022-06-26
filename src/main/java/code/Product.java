@@ -1,21 +1,15 @@
 package code;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
-public abstract class Product extends Observable implements ISwitchable {
-
+public abstract class Product extends Observable{
     Store s = Store.getInstance();
 
     private String naam;
     private String merk;
     private Medewerker m;
     private Klant k;
-    private boolean opVoorraad;
-
 
     public Product(String naam, String merk) throws FileNotFoundException {
         this.naam = naam;
@@ -58,7 +52,6 @@ public abstract class Product extends Observable implements ISwitchable {
         } else {
             System.out.println("FOUTMELDING, GEEN NAAM");
         }
-        this.opVoorraad = status;
         setChanged();
         notifyObservers();
     }
