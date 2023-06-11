@@ -5,32 +5,30 @@ import java.io.FileNotFoundException;
 public class Vrachtwagen extends Product {
 
     private int laadvermogen;
-    private int gewicht;
+    private int cc;
 
-    public Vrachtwagen(String merk, int laadvermogen, int gewicht) throws FileNotFoundException {
+    public Vrachtwagen(String merk, int laadvermogen, int cc) throws FileNotFoundException {
         super("Vrachtwagen", merk);
         this.laadvermogen = laadvermogen;
-        this.gewicht = gewicht;
+        this.cc = cc;
     }
 
     public int getLaadvermogen() {
         return laadvermogen;
     }
 
-    public int getGewicht() {
-        return gewicht;
-    }
+    public int getCc(){return cc;}
 
 
     @Override
     public String getTot() {
-        return getNaam() + " - " + getMerk() + " - " + getLaadvermogen() + " - " + getGewicht();
+        return getNaam() + " - " + getMerk() + " - " + getLaadvermogen() + " KG - "+getCc()+ " CC";
     }
 
     @Override
     public double berekenPrijs(Boolean verzekering) {
         if(verzekering){
-            return laadvermogen*0.10 + gewicht * 0.01;
+            return laadvermogen*0.10 + cc * 0.01;
         }
         return laadvermogen*0.10;
     }

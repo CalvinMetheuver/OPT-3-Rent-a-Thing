@@ -19,5 +19,5 @@ public abstract class ProductFactory {
     public static final AutoFactory AUTO_FACTORY = new AutoFactory();
     public static final VrachtwagenFactory VRACHTWAGEN_FACTORY = new VrachtwagenFactory();
 
-    public abstract Product createProduct(String merk, String type, int gewicht, int lv) throws FileNotFoundException;
+    public abstract Product createProduct(String merk, String type, int kg, int cc) throws FileNotFoundException;
 }
