@@ -26,12 +26,15 @@ public class Auto extends Product {
     }
 
     @Override
-    public double berekenPrijs(Boolean verzekering) {
+    protected double basisPrijs() {
+        return 50;
+    }
 
-        if(verzekering){
-            return 50 + cc * 0.01;
-        } else{
-            return 50;
+    @Override
+    protected double extraPrijs(Boolean verzekering) {
+        if(verzekering) {
+            return cc * 0.01;
         }
+         return 0;
     }
 }

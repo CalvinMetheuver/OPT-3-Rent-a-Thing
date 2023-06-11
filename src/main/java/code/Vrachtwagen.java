@@ -24,12 +24,16 @@ public class Vrachtwagen extends Product {
     public String getTot() {
         return getNaam() + " - " + getMerk() + " - " + getLaadvermogen() + " KG - "+getCc()+ " CC";
     }
+    @Override
+    protected double basisPrijs() {
+        return 0.10 * laadvermogen;
+    }
 
     @Override
-    public double berekenPrijs(Boolean verzekering) {
-        if(verzekering){
-            return laadvermogen*0.10 + cc * 0.01;
+    protected double extraPrijs(Boolean verzekering) {
+        if (verzekering){
+            return cc*0.01;
         }
-        return laadvermogen*0.10;
+        return 0;
     }
 }

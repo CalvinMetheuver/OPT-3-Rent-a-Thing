@@ -51,6 +51,14 @@ public class Store implements Observer{
         return null;
     }
 
+    public void addProductToStore(Product product) {
+        producten.add(product);
+    }
+
+    public void addMedewerkerToStore(Medewerker medewerker){
+        medewerkers.add(medewerker);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         notifyAll();

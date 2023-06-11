@@ -19,11 +19,15 @@ public class Boor extends Product {
     }
 
     @Override
-    public double berekenPrijs(Boolean verzekering) {
+    protected double basisPrijs() {
+        return 5;
+    }
+
+    @Override
+    protected double extraPrijs(Boolean verzekering) {
         if(verzekering){
-            return 5+1;
-        }else{
-            return 5;
+            return 1;
         }
+        return 0;
     }
 }

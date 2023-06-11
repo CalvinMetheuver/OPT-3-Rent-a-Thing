@@ -16,7 +16,7 @@ public abstract class Product extends Observable{
         this.merk = merk;
         this.m = null;
         this.k = null;
-        s.getProducten().add(this);
+        s.addProductToStore(this);
         setOpVerhuurd(false, null, null);
     }
 
@@ -58,7 +58,14 @@ public abstract class Product extends Observable{
 
     public abstract String getTot();
 
-    public abstract double berekenPrijs(Boolean verzekering);
+    public final double berekenPrijs(Boolean verzekering) {
+        double basisPrijs = basisPrijs();
+        double extraPrijs = extraPrijs(verzekering);
+        return basisPrijs + extraPrijs;
+    }
+
+    protected abstract double basisPrijs();
+    protected abstract double extraPrijs(Boolean verzekering);
 
 
 }

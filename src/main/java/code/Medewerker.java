@@ -23,7 +23,7 @@ public class Medewerker {
         this.achternaam = achternaam;
         this.medcode = medcode;
         this.ww = ww;
-        s.medewerkers.add(this);
+        s.addMedewerkerToStore(this);
         actief = false;
     }
 
