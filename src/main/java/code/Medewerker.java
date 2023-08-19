@@ -2,7 +2,7 @@ package code;
 
 import java.io.FileNotFoundException;
 
-public class Medewerker {
+public class Medewerker extends Gebruiker {
     private Store s;
     {
         try {
@@ -11,16 +11,12 @@ public class Medewerker {
             e.printStackTrace();
         }
     }
-
-    private final String voornaam;
-    private final String achternaam;
-    int medcode;
-    String ww;
+    private int medcode;
+    private String ww;
     Boolean actief;
 
     public Medewerker(String voornaam, String achternaam, int medcode, String ww) {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+        super(voornaam, achternaam);
         this.medcode = medcode;
         this.ww = ww;
         s.addMedewerkerToStore(this);
@@ -32,11 +28,11 @@ public class Medewerker {
     }
 
     public String getVoornaam() {
-        return voornaam;
+        return super.getVnaam();
     }
 
     public String getAchternaam() {
-        return achternaam;
+        return super.getAnaam();
     }
 
     public int getMedcode() {

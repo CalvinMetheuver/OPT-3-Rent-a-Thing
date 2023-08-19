@@ -7,9 +7,9 @@ public class Main {
         new Boor( "Bosch", "UniversalDrill18");
         new Boor( "VONROC", "12V Li-Ion");
         new Boor( "Makita", "HP457DWE10");
-        new Auto("Mercedes",900, 30);
-        new Auto("BMW", 1320, 20);
-        new Auto("Audi", 1020, 10);
+        new PersonenAuto("Mercedes",900, 30);
+        new PersonenAuto("BMW", 1320, 20);
+        new PersonenAuto("Audi", 1020, 10);
         new Vrachtwagen("Mercedes",21000,  14000);
         new Vrachtwagen("Volvo",9350,  9000);
         new Vrachtwagen("Volvo",15000, 15000);

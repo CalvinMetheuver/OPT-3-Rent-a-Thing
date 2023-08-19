@@ -1,7 +1,6 @@
 package code;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public abstract class ProductFactory {
 
@@ -16,7 +15,7 @@ public abstract class ProductFactory {
     }
 
     public static final BoorFactory BOOR_FACTORY = new BoorFactory();
-    public static final AutoFactory AUTO_FACTORY = new AutoFactory();
+    public static final PersonenAutoFactory AUTO_FACTORY = new PersonenAutoFactory();
     public static final VrachtwagenFactory VRACHTWAGEN_FACTORY = new VrachtwagenFactory();
 
     public abstract Product createProduct(String merk, String type, int kg, int cc) throws FileNotFoundException;
